@@ -17,6 +17,13 @@ export const Badge = styled.View`
     border-radius: 20px;
 `;
 
+export const PokemonSprite = styled.Image`
+    width: 80px;
+    height: 80px;
+    margin-bottom: -8px;
+    align-self: center;
+`;
+
 export const PokemonNameBadge = styled.View.attrs({
     shadowColor: '#000',
     elevation: 10

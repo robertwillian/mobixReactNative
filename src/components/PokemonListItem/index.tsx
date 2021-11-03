@@ -1,21 +1,32 @@
-import React from 'react';
-import { Title } from 'react-native-paper';
+import React, { useEffect } from 'react';
+import { Image, Text } from 'react-native';
+import { ActivityIndicator, Title } from 'react-native-paper';
+import { useDispatch } from 'react-redux';
+import { actionPokemonDetailRequest } from '../../store/pokemon/actions';
 import { IPokemon } from '../../store/pokemon/types';
 
-import { Container, PokemonNameBadge, Badge, PokemonName } from './styles';
+import { Container, PokemonNameBadge, Badge, PokemonName, PokemonSprite } from './styles';
 
 interface Props {
-    pokemon?: IPokemon;
+    pokemon: IPokemon;
 }
 
-const PokemonListItem: React.FC<Props> = ({pokemon}) => {
-  return <Container>
-      <Badge>
-          <PokemonNameBadge>
-            <PokemonName numberOfLines={1}>{pokemon?.name}</PokemonName>
-          </PokemonNameBadge>
-      </Badge>
-  </Container>;
+const PokemonListItem: React.FC<Props> = ({ pokemon }) => {
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(actionPokemonDetailRequest(pokemon.name))
+    }, [])
+
+    return <Container>
+        <Badge>
+            {!pokemon.isLoading && pokemon.sprite && <PokemonSprite source={{uri: pokemon.sprite}} />}
+            {pokemon.isLoading && <ActivityIndicator />}
+            <PokemonNameBadge>
+                <PokemonName numberOfLines={1}>{pokemon.name}</PokemonName>
+            </PokemonNameBadge>
+        </Badge>
+    </Container>;
 }
 
 export default PokemonListItem;

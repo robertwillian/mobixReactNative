@@ -1,11 +1,12 @@
 import { AxiosResponse } from 'axios';
 import { AnyAction } from 'redux';
 import {takeEvery, all, put} from 'redux-saga/effects'
-import { actionPokemonSuccess } from './actions';
+import { actionPokemonDetailSuccess, actionPokemonSuccess } from './actions';
 
-import { serviceRequestPokemonList } from "./services";
-import { IPokemonRequestResponse, PokemonActionTypes } from './types';
+import { serviceRequestPokemonDetail, serviceRequestPokemonList } from "./services";
+import { IPokemonDetailResponse, IPokemonRequestResponse, PokemonActionTypes } from './types';
 
+// Pokemon List
 function* sagaPokemonRequest(action: AnyAction) {
     try {
         const response: IPokemonRequestResponse = yield serviceRequestPokemonList(action.url)
@@ -13,8 +14,6 @@ function* sagaPokemonRequest(action: AnyAction) {
         yield put(actionPokemonSuccess(response));
     }
     catch(error) {
-        console.log('check 2', error);
-        
     }
 }
 
@@ -22,6 +21,23 @@ function* wathcSagaPokemonListRequest() {
     yield takeEvery(PokemonActionTypes.POKEMON_REQUEST, sagaPokemonRequest)
 }
 
+// Pokemon details
+function* sagaPokemonDetailRequest(action: AnyAction) {
+    try {
+        const response: IPokemonDetailResponse = yield serviceRequestPokemonDetail(action.name)
+
+        yield put(actionPokemonDetailSuccess(response));
+    }
+    catch(error) {
+        
+    }
+}
+
+function* wathcSagaPokemonDetailRequest() {
+    yield takeEvery(PokemonActionTypes.POKEMON_DETAIL_REQUEST, sagaPokemonDetailRequest)
+}
+
 export default all([
-    wathcSagaPokemonListRequest()
+    wathcSagaPokemonListRequest(),
+    wathcSagaPokemonDetailRequest()
 ])

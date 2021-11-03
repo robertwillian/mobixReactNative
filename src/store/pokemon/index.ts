@@ -1,5 +1,5 @@
 import { Reducer } from "redux";
-import { functionReducerPokemonListRequest, functionReducerPokemonListSuccess } from "./reducerFunctions";
+import { functionReducerPokemonDetailRequest, functionReducerPokemonDetailSuccess, functionReducerPokemonListRequest, functionReducerPokemonListSuccess } from "./reducerFunctions";
 import { IPokemonState, PokemonActionTypes } from "./types";
 
 export const POKEMON_INITIAL_STATE: IPokemonState = {
@@ -16,6 +16,12 @@ const pokemonReducer: Reducer<IPokemonState> = (state = POKEMON_INITIAL_STATE, a
     
         case PokemonActionTypes.POKEMON_SUCCESS:
             return functionReducerPokemonListSuccess(state, action);
+
+        case PokemonActionTypes.POKEMON_DETAIL_REQUEST:
+            return functionReducerPokemonDetailRequest(state, action);
+
+        case PokemonActionTypes.POKEMON_DETAIL_SUCCESS:
+            return functionReducerPokemonDetailSuccess(state, action);
 
         default: return state;
     }

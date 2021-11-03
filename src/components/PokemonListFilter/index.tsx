@@ -4,7 +4,6 @@ import settingsIcon from '../../assets/images/settings_icon.png';
 import { Image } from 'react-native';
 import {useDispatch} from 'react-redux'
 import { actionPokemonRequest } from '../../store/pokemon/actions';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const PokemonListFilter: React.FC = () => {
     const dispatch = useDispatch();

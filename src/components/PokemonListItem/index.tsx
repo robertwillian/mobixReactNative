@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/core';
 import React, { useEffect } from 'react';
 import { Image, Text } from 'react-native';
 import { ActivityIndicator, Title } from 'react-native-paper';
@@ -14,11 +15,15 @@ interface Props {
 const PokemonListItem: React.FC<Props> = ({ pokemon }) => {
     const dispatch = useDispatch()
 
+    const navigation = useNavigation();
+
     useEffect(() => {
         dispatch(actionPokemonDetailRequest(pokemon.name))
     }, [])
 
-    return <Container>
+    return <Container onPress={() => {
+        navigation.navigate('PokemonDetails', {name: pokemon.name})
+    }}>
         <Badge>
             {!pokemon.isLoading && pokemon.sprite && <PokemonSprite source={{uri: pokemon.sprite}} />}
             {pokemon.isLoading && <ActivityIndicator />}

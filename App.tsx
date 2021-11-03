@@ -9,6 +9,7 @@ import { Theme } from 'react-native-paper/lib/typescript/types';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Provider } from 'react-redux';
 import store from './src/store';
+import PokemonDetails from './src/views/PokemonDetails';
 
 
 
@@ -38,7 +39,8 @@ const theme: Theme = {
   colors: {
     ...DefaultTheme.colors,
     primary: '#2E6EB5',
-    background: '#FFFFFF'
+    background: '#FFFFFF',
+    text: '#000'
   },
   fonts: configureFonts(fontConfig)
 }
@@ -46,6 +48,7 @@ const theme: Theme = {
 export type IRootStackInterface = {
   Authentication: undefined;
   PokemonList: undefined;
+  PokemonDetails: {name: string;}
 };
 
 const Stack = createNativeStackNavigator<IRootStackInterface>();
@@ -59,6 +62,7 @@ const App = () => {
             <Stack.Navigator screenOptions={{ headerShown: false }}>
               <Stack.Screen name={"Authentication"} component={Authentication} />
               <Stack.Screen name={"PokemonList"} component={PokemonList} />
+              <Stack.Screen name={"PokemonDetails"} component={PokemonDetails} />
             </Stack.Navigator>
           </NavigationContainer>
         </SafeAreaProvider>

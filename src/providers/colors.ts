@@ -30,7 +30,7 @@ export const getColors = (type: string) : string[] => {
         case "fire": 
             return ["#FF6969","#FD9E5A","#FFF"]
 
-        case "eletric": 
+        case "electric": 
             return ["#a48d11","#e6f20d", "#FFF"]
 
         case "grass": 

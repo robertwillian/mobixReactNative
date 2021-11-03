@@ -62,7 +62,8 @@ export const functionReducerPokemonDetailSuccess = (state: IPokemonState, action
             types: requestResult.types,
             stats: requestResult.stats,
             height: requestResult.height,
-            weight: requestResult.weight
+            weight: requestResult.weight,
+            abilities: requestResult.abilities
         }
     });
 

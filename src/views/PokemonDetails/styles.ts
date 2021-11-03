@@ -1,5 +1,6 @@
 import { Text, Title } from 'react-native-paper';
 import styled from 'styled-components/native';
+import LinearGradient from 'react-native-linear-gradient';
 
 export const Container = styled.SafeAreaView`
     display: flex;
@@ -70,9 +71,13 @@ export const PokemonTypeText = styled(Text)`
 
 export const PokemonSpriteContainer = styled.View`
     height: 250px;
+    margin-bottom: 18px;
 `;
 
-export const PokemonBackground = styled.View`
+export const PokemonBackground = styled(LinearGradient).attrs({
+    start: { x: 0, y: 1 },
+    end: { x: 1, y: 0 }
+})`
     display: flex;
     width: 100%;
     flex: 1;

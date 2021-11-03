@@ -23,6 +23,7 @@ export interface IPokemon {
     sprite?: string;
     types?: IPokemonTypes[];
     stats?: IPokemonStats[];
+    abilities?: IPokemonAbilities[];
     height?: number;
     weight?: number;
 }
@@ -53,7 +54,8 @@ export interface IPokemonDetailResponse{
         }
     },
     stats: IPokemonStats[],
-    types: IPokemonTypes[]
+    types: IPokemonTypes[],
+    abilities: IPokemonAbilities[],
 }
 
 export interface IPokemonStats {
@@ -71,4 +73,12 @@ export interface IPokemonTypes {
         name: string,
         url: string
     }
+}
+export interface IPokemonAbilities {
+    ability: {
+        name: string,
+        url: string
+    },
+    is_hidden: boolean,
+    slot: number
 }

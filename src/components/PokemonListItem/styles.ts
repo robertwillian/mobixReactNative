@@ -1,5 +1,6 @@
 import { Title } from "react-native-paper";
 import styled from "styled-components/native";
+import LinearGradient from 'react-native-linear-gradient';
 
 export const Container = styled.TouchableOpacity`
     display: flex;
@@ -7,10 +8,13 @@ export const Container = styled.TouchableOpacity`
     height: 124px;
 `;
 
-export const Badge = styled.View`
+export const Badge = styled(LinearGradient).attrs({
+    start: { x: 0, y: 1 },
+    end: { x: 1, y: 0 }
+})`
     display: flex;
     flex: 1;
-    background-color: #CCC;
+    /* background-color: #CCC; */
     margin: 8px;
     margin-top: 28px;
     justify-content: flex-end;

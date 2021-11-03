@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { Image, Text } from 'react-native';
 import { ActivityIndicator, Title } from 'react-native-paper';
 import { useDispatch } from 'react-redux';
+import { getColors } from '../../providers/colors';
 import { actionPokemonDetailRequest } from '../../store/pokemon/actions';
 import { IPokemon } from '../../store/pokemon/types';
 
@@ -17,6 +18,10 @@ const PokemonListItem: React.FC<Props> = ({ pokemon }) => {
 
     const navigation = useNavigation();
 
+    const type = pokemon.types && pokemon.types?.length > 0 ? pokemon.types[0].type.name : "unknow";
+
+    const colors = getColors(type);
+
     useEffect(() => {
         dispatch(actionPokemonDetailRequest(pokemon.name))
     }, [])
@@ -24,7 +29,7 @@ const PokemonListItem: React.FC<Props> = ({ pokemon }) => {
     return <Container onPress={() => {
         navigation.navigate('PokemonDetails', {name: pokemon.name})
     }}>
-        <Badge>
+        <Badge colors={[colors[0], colors[1]]}>
             {!pokemon.isLoading && pokemon.sprite && <PokemonSprite source={{uri: pokemon.sprite}} />}
             {pokemon.isLoading && <ActivityIndicator />}
             <PokemonNameBadge>

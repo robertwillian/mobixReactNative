@@ -18,3 +18,14 @@ export const Header = styled.View`
     flex-direction: row;
 
 `;
+
+export const FilterWrapper = styled.View`
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 80%;
+    height: 100%;
+    flex: 1;
+    background-color: #FFF;
+    padding: 18px;
+`;

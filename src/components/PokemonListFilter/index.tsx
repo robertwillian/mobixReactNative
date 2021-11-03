@@ -2,22 +2,37 @@ import React from 'react';
 import { Container, FilterTextInput, FilterToggleButton } from './styles';
 import settingsIcon from '../../assets/images/settings_icon.png';
 import { Image } from 'react-native';
-import {useDispatch} from 'react-redux'
+import {connect, useDispatch} from 'react-redux'
 import { actionPokemonRequest } from '../../store/pokemon/actions';
+import { IApplicationState } from '../../store/types';
+import { IFilterState } from '../../store/filters/types';
+import { actionFilterChangeText, actionFilterTogglePannel } from '../../store/filters/actions';
 
-const PokemonListFilter: React.FC = () => {
+
+interface Props{
+    filter: IFilterState
+}
+
+const PokemonListFilter: React.FC<Props> = ({filter}) => {
     const dispatch = useDispatch();
 
     return <Container>
-        <FilterTextInput placeholder={'Buscar Pokémon'} />
+        <FilterTextInput 
+            placeholder={'Buscar Pokémon'} 
+            value={filter.text}
+            onChangeText={text => dispatch(actionFilterChangeText(text))}
+              />
 
         <FilterToggleButton onPress={() => {
-            // AsyncStorage.clear();
-            dispatch(actionPokemonRequest())
+            dispatch(actionFilterTogglePannel())
         }}>
             <Image source={settingsIcon} />
         </FilterToggleButton>
     </Container>;
 }
 
-export default PokemonListFilter;
+
+const mapStateToProps = (state: IApplicationState) => ({
+    filter: state.filter
+})
+export default connect(mapStateToProps)(PokemonListFilter);

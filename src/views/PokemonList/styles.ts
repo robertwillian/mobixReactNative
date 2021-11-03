@@ -1,9 +1,9 @@
 import styled from 'styled-components/native';
 
 export const Container = styled.SafeAreaView`
-  display: flex;
-  flex: 1;
-
+    display: flex;
+    flex: 1;
+    background-color: #FFF;
 `;
 
 export const Logo = styled.Image`
@@ -16,5 +16,5 @@ export const Logo = styled.Image`
 export const Header = styled.View`
     display: flex;
     flex-direction: row;
-    
+
 `;

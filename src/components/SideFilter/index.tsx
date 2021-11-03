@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
 import { Button } from 'react-native-paper';
-import { useDispatch } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import closeIcon from '../../assets/images/close_icon.png'
 import { actionFilterClear, actionFilterSetTypes, actionFilterTogglePannel } from '../../store/filters/actions';
+import { IFilterState } from '../../store/filters/types';
+import { IApplicationState } from '../../store/types';
 
 import { Container, FilterClear, FilterClearText, FilterClose, FilterCloseIcon, FilterSubTitle, FilterTitle, FilterTypeListItem, FilterTypesList, Header } from './styles';
 
-const SideFilter: React.FC = () => {
+interface Props {
+    filter: IFilterState
+}
+
+const SideFilter: React.FC<Props> = ({filter}) => {
     const dispatch = useDispatch()
 
     const typesList = [
@@ -33,7 +39,7 @@ const SideFilter: React.FC = () => {
         {id: "normal", name:"Normal"}
     ]
 
-    const [pokemonTypes, setPokemonTypes] = useState<string[]>([])
+    const [pokemonTypes, setPokemonTypes] = useState<string[]>(filter.types)
 
     return <Container>
         <Header>
@@ -78,5 +84,7 @@ const SideFilter: React.FC = () => {
             >Aplicar</Button>
   </Container>;
 }
-
-export default SideFilter;
+const mapStateToProps = (state: IApplicationState) => ({
+    filter: state.filter
+})
+export default connect(mapStateToProps)(SideFilter);

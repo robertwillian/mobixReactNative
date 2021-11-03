@@ -23,6 +23,7 @@ const PokemonListItem: React.FC<Props> = ({ pokemon }) => {
     const colors = getColors(type);
 
     useEffect(() => {
+        if(!pokemon.id)
         dispatch(actionPokemonDetailRequest(pokemon.name))
     }, [])
 

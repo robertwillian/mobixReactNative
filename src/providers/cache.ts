@@ -18,6 +18,6 @@ export const saveCache = async (key: string, object: any) => {
         await AsyncStorage.setItem(key, stringifyed);
     }
     catch(error) {
-        console.log(`Error saving cache: ${error}`);
+        console.log(`Error saving cache ${key}: ${error}`);
     }
 }

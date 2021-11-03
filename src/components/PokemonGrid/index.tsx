@@ -38,10 +38,6 @@ const PokemonGrid: React.FC<Props> = ({pokemon, filter}) => {
         return isToReturn;
     })
 
-    const memoizedValue = useMemo(() => renderItem, [pokemon.isLoading]);
-
-    const renderItem: ListRenderItem<IPokemon> = item => <PokemonListItem pokemon={item.item} />
-
     return <List
     removeClippedSubviews
         data={filteredPokemon}

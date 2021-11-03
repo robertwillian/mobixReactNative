@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import Authentication from './src/views/Authentication';
@@ -10,6 +10,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Provider } from 'react-redux';
 import store from './src/store';
 import PokemonDetails from './src/views/PokemonDetails';
+import { NavigationRef } from './src/providers/NavigationRef';
 
 
 
@@ -54,11 +55,12 @@ export type IRootStackInterface = {
 const Stack = createNativeStackNavigator<IRootStackInterface>();
 
 const App = () => {
+  
   return (
     <PaperProvider theme={theme}>
       <Provider store={store}>
         <SafeAreaProvider>
-          <NavigationContainer>
+          <NavigationContainer ref={NavigationRef}>
             <Stack.Navigator screenOptions={{ headerShown: false }}>
               <Stack.Screen name={"Authentication"} component={Authentication} />
               <Stack.Screen name={"PokemonList"} component={PokemonList} />

@@ -53,3 +53,10 @@ export const AuthenticationButton = styled(Button).attrs({
     margin-top: 18px;
     border-radius: 8px;
 `;
+
+export const AuthenticationErrorMessage = styled(Caption)`
+    font-weight: 300;
+    font-size: 14px;
+    margin-bottom: 30px;
+    color: #F00;
+`;
